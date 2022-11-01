@@ -7,9 +7,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import updateUiReducer from './feature/updateUiSlice';
+import loaderReducer from './feature/loaderSlice';
+import categoryReducer from './feature/categorySlice';
+import taskCountReducer from './feature/taskCountSlice';
 
 const store = configureStore({
-  reducer: { updateUi: updateUiReducer },
+  reducer: { updateUi: updateUiReducer, loader: loaderReducer, category: categoryReducer, taskCount: taskCountReducer },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
