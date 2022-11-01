@@ -28,15 +28,18 @@ const Navbar = () => {
         prevState = 'light';
         localStorage.setItem('theme', 'light');
       }
-
       return prevState;
     });
   };
 
   useEffect(() => {
     document.documentElement.className = userTheme;
-    setUserTheme(localStorage.getItem('theme'));
+    if (localStorage.getItem('theme')) {
+      setUserTheme(localStorage.getItem('theme'));
+    }
   }, [userTheme]);
+
+  console.log(userTheme);
 
   return (
     <nav className='bg-white shadow-sm border-b border-slate-200 p-[20px] dark:bg-slate-900 dark:text-white dark:border-b dark:border-slate-700'>
