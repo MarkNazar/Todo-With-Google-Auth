@@ -8,7 +8,7 @@ import { refresh } from '../feature/updateUiSlice';
 import { act } from 'react-dom/test-utils';
 
 const Categories = () => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(1);
   const dispatch = useDispatch();
 
   const setActiveClass = (e, id) => {

@@ -39,8 +39,6 @@ const Navbar = () => {
     }
   }, [userTheme]);
 
-  console.log(userTheme);
-
   return (
     <nav className='bg-white shadow-sm border-b border-slate-200 p-[20px] dark:bg-slate-900 dark:text-white dark:border-b dark:border-slate-700'>
       <div className='max-w-screen-md mx-auto flex justify-end items-center space-x-4'>
