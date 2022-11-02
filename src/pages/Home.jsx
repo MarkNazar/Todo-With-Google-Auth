@@ -19,36 +19,32 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  const getTaskCount = data => {
+  const getOwnData = data => {
     const ownData = data.docs
       ?.filter(doc => {
         return doc.data().userId === auth.currentUser.uid;
       })
       .map(doc => ({ ...doc.data(), id: doc.id }));
-    const completedTask = ownData?.filter(data => data.status === 1);
-    dispatch(setCount({ total: ownData.length, completed: completedTask.length }));
+    return ownData;
+  };
+
+  const getTaskCount = data => {
+    const todoData = getOwnData(data);
+    const completedTask = todoData?.filter(data => data.status === 1);
+    dispatch(setCount({ total: todoData.length, completed: completedTask.length }));
   };
 
   const getTodos = async category => {
     dispatch(setLoader({ text: 'Getting data', status: true }));
     const data = await getDocs(todoRef);
     if (category === 'all') {
-      const ownData = data.docs
-        ?.filter(doc => {
-          return doc.data().userId === auth.currentUser.uid;
-        })
-        .map(doc => ({ ...doc.data(), id: doc.id }));
-      setTodoList(ownData);
+      const todoData = getOwnData(data);
+      setTodoList(todoData);
     } else {
       const q = query(todoRef, where('status', '==', category === 'completed' ? 1 : 0));
       const data = await getDocs(q);
-      const ownData = data.docs
-        ?.filter(doc => {
-          return doc.data().userId === auth.currentUser.uid;
-        })
-        .map(doc => ({ ...doc.data(), id: doc.id }));
-
-      setTodoList(ownData);
+      const todoData = getOwnData(data);
+      setTodoList(todoData);
     }
     dispatch(setLoader({ text: '', status: false }));
     getTaskCount(data);

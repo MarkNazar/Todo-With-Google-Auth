@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { setCategory } from '../feature/categorySlice';
 import { setMessage } from '../feature/categorySlice';
 import { refresh } from '../feature/updateUiSlice';
-import { act } from 'react-dom/test-utils';
 
 const Categories = () => {
   const [active, setActive] = useState(1);
@@ -28,7 +27,7 @@ const Categories = () => {
         const { id, title } = category;
         return (
           <button
-            className={`capitalize ${active === id ? 'bg-slate-100 dark:bg-slate-800' : 'bg-transparent'} px-4 py-1 rounded-sm`}
+            className={`capitalize ${active === id ? 'bg-slate-200 dark:bg-slate-800' : 'bg-transparent'} px-4 py-1 rounded-sm`}
             onClick={e => {
               setActiveClass(e, id);
               handleFilterCategory(title);
